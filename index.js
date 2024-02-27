@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
+app.use(cors());
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
 const users = [
   "Saidee",
   "Masud",
@@ -11,6 +15,9 @@ const users = [
   "nyeak",
   "Kola khabo",
 ];
+
+// get
+
 app.get("/", (req, res) => {
   const frouit = {
     product: "ada",
@@ -33,4 +40,13 @@ app.get("/user/:id", (req, res) => {
   const name = users[id];
   res.send({ id, name });
 });
+
+//post
+app.post("/addUser", (req, res) => {
+  //Save to database
+  const user = req.body;
+  user.id = 55;
+  res.send(user);
+});
+
 app.listen(4000, () => console.log("Listing port ami onekto 3000"));
